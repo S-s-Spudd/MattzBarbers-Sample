@@ -13,6 +13,7 @@ const images = [
   ['Logo.jpg', 'logo.webp'],
   ['Shape Up.jpg', 'shape-up.webp'],
   ['Shop Interior.jpg', 'shop-interior.webp'],
+  ['Trim.jpg', 'trim.webp'],
 ];
 
 await fs.mkdir(outputDir, { recursive: true });
