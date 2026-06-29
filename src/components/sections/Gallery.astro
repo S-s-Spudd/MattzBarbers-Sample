@@ -1,0 +1,124 @@
+---
+// Gallery — charcoal darkroom BG (#111111), not teal
+const photos = [
+  { src: 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=700&q=80&auto=format&fit=crop&crop=face', alt: 'Clean skin fade', caption: 'The Fade.', rotate: '-1.8deg', span2: true },
+  { src: 'https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=600&q=80&auto=format&fit=crop', alt: 'Precision haircut', caption: 'Scissors & Craft.', rotate: '1.5deg', span2: false },
+  { src: 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&q=80&auto=format&fit=crop', alt: 'Barber at work', caption: 'In the Zone.', rotate: '-1.2deg', span2: false },
+  { src: 'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=700&q=80&auto=format&fit=crop', alt: 'Beard shape', caption: 'The Shape-Up.', rotate: '2.2deg', span2: true },
+  { src: 'https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=600&q=80&auto=format&fit=crop', alt: 'The chair', caption: 'The Chair.', rotate: '-1.5deg', span2: false },
+  { src: 'https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=600&q=80&auto=format&fit=crop', alt: 'Hot towel finish', caption: 'The Finish.', rotate: '0.8deg', span2: false },
+];
+---
+
+<section id="gallery" class="relative py-24 md:py-36 overflow-hidden"
+         style="background:var(--gallery-bg);" aria-label="Photo gallery">
+
+  <!-- Ambient watermark -->
+  <div class="gallery-bg-word absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden" aria-hidden="true">
+    <span class="font-display italic font-light whitespace-nowrap"
+          style="font-size:clamp(7rem,20vw,22rem);color:var(--gallery-text);opacity:0.03;letter-spacing:-0.02em;">
+      Gallery
+    </span>
+  </div>
+
+  <div class="relative z-10 max-w-[1600px] mx-auto px-[clamp(1.25rem,5vw,5rem)]">
+
+    <!-- Header -->
+    <div class="mb-12 md:mb-16 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-5">
+      <div>
+        <p class="eyebrow mb-4 reveal" style="color:var(--accent);">From the Chair</p>
+        <h2 class="font-display italic font-light leading-[0.9] text-[clamp(2.2rem,5vw,4.5rem)] reveal reveal-delay-1"
+            style="color:var(--gallery-text);">
+          Captured between<br/>the before &amp; after.
+        </h2>
+      </div>
+      <a href="https://www.instagram.com/mattzbarbers_/" target="_blank" rel="noopener noreferrer"
+         class="flex items-center gap-2 text-xs tracking-[0.2em] uppercase text-gray-500 hover:text-[var(--accent)] transition-colors reveal reveal-delay-2 self-start sm:self-auto"
+         aria-label="Follow Mattz Barbers on Instagram">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+        </svg>
+        @mattzbarbers_
+      </a>
+    </div>
+
+    <!-- Bento polaroid grid -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5" style="grid-auto-rows:clamp(180px,22vw,260px);">
+      <!-- Large: col 1–2, row 1–2 -->
+      <div class="col-span-1 md:col-span-2 row-span-1 md:row-span-2">
+        <div class="polaroid h-full" style="transform:rotate(-1.8deg);">
+          <div class="polaroid-photo h-[calc(100%-40px)]">
+            <img src={photos[0].src} alt={photos[0].alt} class="w-full h-full object-cover block" loading="lazy" decoding="async"/>
+          </div>
+          <p class="polaroid-caption">{photos[0].caption}</p>
+        </div>
+      </div>
+      <!-- Small: col 3 row 1 -->
+      <div class="col-span-1 row-span-1">
+        <div class="polaroid h-full" style="transform:rotate(1.5deg);">
+          <div class="polaroid-photo h-[calc(100%-40px)]">
+            <img src={photos[1].src} alt={photos[1].alt} class="w-full h-full object-cover block" loading="lazy" decoding="async"/>
+          </div>
+          <p class="polaroid-caption">{photos[1].caption}</p>
+        </div>
+      </div>
+      <!-- Small: col 4 row 1 -->
+      <div class="col-span-1 row-span-1">
+        <div class="polaroid h-full" style="transform:rotate(-1deg);">
+          <div class="polaroid-photo h-[calc(100%-40px)]">
+            <img src={photos[2].src} alt={photos[2].alt} class="w-full h-full object-cover block" loading="lazy" decoding="async"/>
+          </div>
+          <p class="polaroid-caption">{photos[2].caption}</p>
+        </div>
+      </div>
+      <!-- Large: col 3–4, row 2 -->
+      <div class="col-span-2 row-span-1">
+        <div class="polaroid h-full" style="transform:rotate(2deg);">
+          <div class="polaroid-photo h-[calc(100%-40px)]">
+            <img src={photos[3].src} alt={photos[3].alt} class="w-full h-full object-cover object-top block" loading="lazy" decoding="async"/>
+          </div>
+          <p class="polaroid-caption">{photos[3].caption}</p>
+        </div>
+      </div>
+      <!-- Small: col 1 row 3 -->
+      <div class="col-span-1 row-span-1">
+        <div class="polaroid h-full" style="transform:rotate(-1.5deg);">
+          <div class="polaroid-photo h-[calc(100%-40px)]">
+            <img src={photos[4].src} alt={photos[4].alt} class="w-full h-full object-cover block" loading="lazy" decoding="async"/>
+          </div>
+          <p class="polaroid-caption">{photos[4].caption}</p>
+        </div>
+      </div>
+      <!-- Small: col 2 row 3 -->
+      <div class="col-span-1 row-span-1">
+        <div class="polaroid h-full" style="transform:rotate(0.8deg);">
+          <div class="polaroid-photo h-[calc(100%-40px)]">
+            <img src={photos[5].src} alt={photos[5].alt} class="w-full h-full object-cover block" loading="lazy" decoding="async"/>
+          </div>
+          <p class="polaroid-caption">{photos[5].caption}</p>
+        </div>
+      </div>
+      <!-- Pull quote: col 3–4, row 3 (desktop only) -->
+      <div class="hidden md:flex col-span-2 row-span-1 items-center justify-center p-6" style="border:1px solid rgba(139,74,67,0.15);">
+        <blockquote class="text-center">
+          <p class="font-display italic font-light leading-snug" style="font-size:clamp(1.1rem,2.2vw,1.5rem);color:rgba(245,244,239,0.55);">
+            "Where the craft speaks<br/>louder than the chair."
+          </p>
+        </blockquote>
+      </div>
+    </div>
+
+    <!-- Instagram CTA strip -->
+    <div class="mt-12 flex items-center gap-5 reveal">
+      <div class="hairline flex-1 opacity-20"></div>
+      <a href="https://www.instagram.com/mattzbarbers_/" target="_blank" rel="noopener noreferrer"
+         class="flex items-center gap-3 text-xs tracking-[0.2em] uppercase text-gray-500 hover:text-[var(--accent)] transition-colors">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+        </svg>
+        Follow on Instagram
+      </a>
+      <div class="hairline flex-1 opacity-20"></div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+<Layout title="Page Not Found | Mattz Barbers" description="The page you're looking for doesn't exist.">
+  <Nav />
+  <main class="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6 text-center">
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden" aria-hidden="true">
+      <span class="watermark opacity-[0.03]">404</span>
+    </div>
+    <div class="relative z-10 max-w-sm">
+      <p class="eyebrow mb-6">Lost?</p>
+      <h1 class="font-display italic font-light text-[var(--text)] mb-4 leading-snug" style="font-size:clamp(1.8rem,4vw,2.8rem);">This page got a cut<br/>we can't find.</h1>
+      <p class="text-sm text-[var(--text-muted)] leading-relaxed mb-10">Whatever you were looking for isn't here. Head back home.</p>
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <a href="/" class="btn-book">Back Home</a>
+        <a href="/services" class="text-xs tracking-[0.18em] uppercase text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors">See Services →</a>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>

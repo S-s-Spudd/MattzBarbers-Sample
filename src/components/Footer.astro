@@ -1,0 +1,113 @@
+---
+const { pathname } = Astro.url;
+const isActive = (p: string) => p === '/' ? pathname === '/' : pathname.startsWith(p);
+
+const navLinks = [
+  { href: '/',         label: 'Home'     },
+  { href: '/services', label: 'Services' },
+  { href: '/reviews',  label: 'Reviews'  },
+  { href: '/find-us',  label: 'Find Us'  },
+];
+---
+
+<footer class="relative overflow-hidden" style="background:var(--surface);border-top:1px solid var(--border);" aria-label="Site footer">
+
+  <div class="absolute inset-0 flex items-end overflow-hidden pointer-events-none select-none" aria-hidden="true">
+    <span class="font-display italic font-light text-[var(--text)] whitespace-nowrap"
+          style="font-size:clamp(5rem,13vw,13rem);opacity:0.03;letter-spacing:-0.02em;line-height:1;transform:translateY(22%);">
+      Mattz
+    </span>
+  </div>
+
+  <div class="relative z-10 max-w-[1600px] mx-auto px-[clamp(1.25rem,5vw,5rem)]">
+
+    <!-- Upper footer -->
+    <div class="pt-14 pb-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1fr_auto_auto_auto] gap-10 lg:gap-16">
+
+      <!-- Brand -->
+      <div>
+        <a href="/" aria-label="Mattz Barbers — home">
+          <img src="/images/logo.webp" alt="Mattz Barbers" class="logo-img hover:opacity-75 transition-opacity" style="height:40px;" width="1600" height="558" loading="lazy" decoding="async" />
+        </a>
+        <p class="mt-4 text-sm text-[var(--text-muted)] leading-relaxed max-w-[24ch]">
+          Professional men's hair services in Walmley, Sutton Coldfield.
+        </p>
+        <address class="mt-4 not-italic text-xs text-[var(--text-faint)] leading-relaxed">
+          30A Walmley Road<br/>Sutton Coldfield, B76 1QN
+        </address>
+        <!-- Contact -->
+        <div class="mt-4 space-y-1.5">
+          <a href="tel:+447401132085" class="block text-xs text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors">07401 132085</a>
+          <a href="mailto:matt@mattz.co.uk" class="block text-xs text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors">matt@mattz.co.uk</a>
+        </div>
+        <!-- Social icons -->
+        <div class="mt-5 flex items-center gap-3">
+          <a href="https://www.instagram.com/mattzbarbers_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-link" style="width:28px;height:28px;min-width:unset;min-height:unset;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
+          <a href="https://www.facebook.com/mattzbarbers/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="social-link" style="width:28px;height:28px;min-width:unset;min-height:unset;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div>
+        <p class="eyebrow text-[0.58rem] mb-4 pb-2.5" style="border-bottom:1px solid var(--border);">Pages</p>
+        <nav aria-label="Footer navigation">
+          <ul class="flex flex-col gap-3">
+            {navLinks.map(({ href, label }) => (
+              <li>
+                <a href={href} class:list={['text-sm transition-colors duration-200', isActive(href) ? 'text-[var(--accent)]' : 'text-[var(--text-muted)] hover:text-[var(--accent)]']}>
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <p class="eyebrow text-[0.58rem] mb-4 pb-2.5" style="border-bottom:1px solid var(--border);">Contact</p>
+        <div class="flex flex-col gap-3 text-sm">
+          <a href="tel:+447401132085" class="text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors">07401 132085</a>
+          <a href="mailto:matt@mattz.co.uk" class="text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors">matt@mattz.co.uk</a>
+          <p class="eyebrow text-[0.52rem] pt-2">Social</p>
+          <a href="https://www.instagram.com/mattzbarbers_/" target="_blank" rel="noopener noreferrer" class="text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors">Instagram</a>
+          <a href="https://www.facebook.com/mattzbarbers/" target="_blank" rel="noopener noreferrer" class="text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors">Facebook</a>
+        </div>
+      </div>
+
+      <!-- Book -->
+      <div>
+        <p class="eyebrow text-[0.58rem] mb-4 pb-2.5" style="border-bottom:1px solid var(--border);">Book</p>
+        <div class="flex flex-col gap-3">
+          <a href="https://www.fresha.com/a/mattz-barbers-birmingham-the-royal-town-of-sutton-coldfield-30a-walmley-road-q138b6q6/booking?allOffer=true&pId=1394571"
+             target="_blank" rel="noopener noreferrer"
+             class="text-sm text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors">
+            Appointments via Fresha
+          </a>
+          <a href="https://www.fresha.com/a/mattz-barbers-birmingham-the-royal-town-of-sutton-coldfield-30a-walmley-road-q138b6q6/booking?allOffer=true&pId=1394571"
+             target="_blank" rel="noopener noreferrer"
+             class="btn-book mt-1" style="padding:0.65rem 1.4rem;font-size:0.68rem;">
+            Book Now
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="hairline"></div>
+
+    <div class="py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+      <p class="text-[0.65rem] text-[var(--text-faint)] tracking-wide">© {new Date().getFullYear()} Mattz Barbers. All rights reserved.</p>
+      <p class="text-[0.65rem] text-[var(--text-faint)] tracking-wide">Walmley · Sutton Coldfield · West Midlands</p>
+    </div>
+
+  </div>
+</footer>

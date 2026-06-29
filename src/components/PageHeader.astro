@@ -1,0 +1,27 @@
+---
+export interface Props {
+  eyebrow: string;
+  title: string;
+  subtitle?: string;
+  watermarkWord?: string;
+}
+const { eyebrow, title, subtitle, watermarkWord = title.split('<')[0].trim().split(' ')[0] } = Astro.props;
+---
+<section class="page-header-section" aria-label="Page header">
+  <div class="absolute inset-0 flex items-center overflow-hidden pointer-events-none select-none" aria-hidden="true">
+    <span class="watermark translate-y-[-5%] opacity-[0.035]">{watermarkWord}</span>
+  </div>
+  <div class="relative z-10 max-w-[1600px] mx-auto px-[clamp(1.25rem,5vw,5rem)]">
+    <nav class="mb-6" aria-label="Breadcrumb">
+      <ol class="flex items-center gap-2 text-[0.63rem] tracking-[0.18em] uppercase text-[var(--text-faint)]">
+        <li><a href="/" class="hover:text-[var(--accent)] transition-colors">Home</a></li>
+        <li aria-hidden="true" class="opacity-40">·</li>
+        <li class="text-[var(--accent)]">{eyebrow}</li>
+      </ol>
+    </nav>
+    <p class="eyebrow mb-4 reveal">{eyebrow}</p>
+    <h1 class="font-display italic font-light leading-[0.88] text-[clamp(2.6rem,7vw,7rem)] text-[var(--text)] reveal reveal-delay-1" set:html={title} />
+    {subtitle && <p class="mt-5 text-[var(--text-muted)] text-base leading-relaxed max-w-[44ch] reveal reveal-delay-2">{subtitle}</p>}
+    <div class="hairline mt-8 reveal reveal-delay-3"></div>
+  </div>
+</section>

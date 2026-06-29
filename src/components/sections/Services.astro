@@ -1,0 +1,134 @@
+---
+// Services — exact names & prices from Fresha booking page
+const serviceGroups = [
+  {
+    id: 'featured',
+    category: 'Featured',
+    items: [
+      { name: "Men's Skinfade/Taperfade & Style",      price: 'from £20', duration: '30 mins', popular: true,  desc: 'Select this option if you have a skin fade or #0.5 on the back and sides.' },
+      { name: "Men's Haircut & Style",                  price: 'from £17', duration: '20 mins', popular: false, desc: 'Select this option if you have a #1 or more on the back and sides. Doesn\'t include skin fades or #0.5.' },
+      { name: "Men's Skinfade & Beard Trim",            price: 'from £27', duration: '40 mins', popular: true,  desc: 'Select this option if you have a skin fade or #0.5 and would like a beard trim also.' },
+      { name: "Child's Haircut & Style (U14)",          price: 'from £15', duration: '20-30 mins', popular: false, desc: 'Select this option if your child is Under 14 & has a #1 or above on the sides.' },
+      { name: "Child's Skinfade/Taperfade & Style (U14)", price: 'from £18', duration: '30 mins', popular: false, desc: "Select this option if you're Under 14 & have a skin fade or #0.5 on the sides." },
+      { name: "Men's Haircut & Beard Trim",             price: 'from £25', duration: '40 mins', popular: false, desc: "Select this option if you have a #1 or more on the back and sides and would like a beard trim. Doesn't include skin fades or #0.5." },
+    ],
+  },
+  {
+    id: 'barber-services',
+    category: 'Barber Services',
+    items: [
+      { name: "Senior Cut",                 price: 'from £15', duration: '20-30 mins', popular: false, desc: "Select this option if you're aged 65+." },
+      { name: "Men's Extended Haircut",     price: '£23',      duration: '30 mins',    popular: false, desc: 'Select this option if you are looking for a transformation haircut. This service allows the barber to spend extra time on your desired style.' },
+      { name: 'Beard Trim',                 price: 'from £13', duration: '15-20 mins', popular: false, desc: 'Select this option for a beard trim with just the clippers.' },
+      { name: 'Head Shave & Beard Trim',    price: '£25',      duration: '30 mins',    popular: false, desc: 'Select this option if you have a #0 all over and would like a beard trim also.' },
+      { name: 'Ear & Nose Wax',             price: '£5',       duration: '5 mins',     popular: false, desc: 'Select this option if you would like your ears and/or nose waxed.' },
+    ],
+  },
+];
+
+const steps = [
+  { num: '01', title: 'Book Online', desc: 'Reserve your slot in seconds via Fresha. Choose your service, pick a time, done.' },
+  { num: '02', title: 'Arrive & Settle', desc: 'Walk in, take a seat. Clean shop, good music, no fuss.' },
+  { num: '03', title: 'Leave Different', desc: 'Clean lines, sharp fade, quality finish. Walk out looking and feeling the part.' },
+];
+
+const faqs = [
+  { q: 'Do I need to book in advance?', a: 'Yes — Mattz Barbers is an appointment-only shop. Booking takes less than a minute on Fresha and guarantees your time slot.' },
+  { q: 'How long does a skin fade take?', a: "Around 30 minutes for a full Skinfade/Taperfade & Style. A standard haircut is roughly 20 minutes. We always allow proper time — no rushed cuts." },
+  { q: 'What should I bring or say when I arrive?', a: "Just yourself. If you have a reference photo, bring it. Otherwise we'll talk through what you want before picking up the scissors." },
+  { q: 'Can I bring my child in for their first haircut?', a: "Absolutely. We're experienced with children's cuts and they'll be made to feel welcome from the moment they come in." },
+];
+---
+
+<!-- How It Works -->
+<section class="relative py-20 md:py-28 overflow-hidden" style="background:var(--bg-alt);" aria-label="How it works">
+  <div class="max-w-[1600px] mx-auto px-[clamp(1.25rem,5vw,5rem)]">
+    <div class="mb-12">
+      <p class="eyebrow mb-4 reveal">The Process</p>
+      <h2 class="font-display italic font-light leading-[0.9] text-[clamp(2rem,4vw,3.5rem)] text-[var(--text)] reveal reveal-delay-1">How it works.</h2>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-0">
+      {steps.map((s) => (
+        <div class="step-card"><p class="step-number">{s.num}</p>
+          <h3 class="font-display italic text-xl text-[var(--text)] mt-3 mb-2">{s.title}</h3>
+          <p class="text-sm text-[var(--text-muted)] leading-relaxed">{s.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="relative py-20 md:py-32 overflow-hidden" style="background:var(--bg);" aria-label="Services and pricing">
+  <div class="absolute inset-0 flex items-center justify-end pointer-events-none select-none overflow-hidden" aria-hidden="true">
+    <span class="watermark translate-x-[18%] opacity-[0.03]">Menu</span>
+  </div>
+  <div class="relative z-10 max-w-[1600px] mx-auto px-[clamp(1.25rem,5vw,5rem)]">
+    <!-- Category nav -->
+    <div class="mb-10 reveal">
+      <nav class="cat-nav" aria-label="Service categories">
+        <a href="#featured">Featured</a>
+        <a href="#barber-services">All Services</a>
+      </nav>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-[320px_1fr] xl:grid-cols-[380px_1fr] gap-10 lg:gap-20">
+      <!-- Sticky left -->
+      <div class="lg:sticky lg:top-32 lg:self-start">
+        <p class="eyebrow mb-4 reveal">Pricing</p>
+        <h2 class="font-display italic font-light leading-[0.9] text-[clamp(2rem,4vw,3.5rem)] text-[var(--text)] reveal reveal-delay-1">Every cut,<br/>a fresh start.</h2>
+        <div class="hairline mt-6 mb-5 reveal reveal-delay-2"></div>
+        <p class="text-[var(--text-muted)] text-sm leading-relaxed max-w-[28ch] reveal reveal-delay-3">Appointment only. Prices shown are a starting guide — confirmed at booking.</p>
+        <div class="mt-8 reveal reveal-delay-4">
+          <a href="https://www.fresha.com/a/mattz-barbers-birmingham-the-royal-town-of-sutton-coldfield-30a-walmley-road-q138b6q6/booking?allOffer=true&pId=1394571"
+             target="_blank" rel="noopener noreferrer" class="btn-book">Book a Slot</a>
+        </div>
+      </div>
+
+      <!-- Service groups -->
+      <div class="flex flex-col gap-10">
+        {serviceGroups.map((group) => (
+          <div id={group.id}>
+            <p class="eyebrow text-[0.6rem] mb-3 pb-3 border-b border-[var(--border)] reveal">{group.category}</p>
+            {group.items.map((item) => (
+              <div class="service-item">
+                <div class="flex-1 min-w-0">
+                  <div class="flex flex-wrap items-center gap-2">
+                    <span class="service-name">{item.name}</span>
+                    {item.popular && <span class="service-badge">Popular</span>}
+                  </div>
+                  <p class="service-desc">{item.desc}</p>
+                </div>
+                <div class="service-meta flex-shrink-0 ml-4 text-right">
+                  <span class="service-price">{item.price}</span>
+                  <span class="service-duration block">{item.duration}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        ))}
+        <p class="text-[0.68rem] text-[var(--text-faint)] tracking-wide reveal">All prices subject to change. Confirmed at time of booking on Fresha.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="relative py-20 md:py-28 overflow-hidden" style="background:var(--bg-alt);" aria-label="FAQ">
+  <div class="max-w-[1600px] mx-auto px-[clamp(1.25rem,5vw,5rem)]">
+    <div class="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-10 lg:gap-20">
+      <div>
+        <p class="eyebrow mb-4 reveal">FAQ</p>
+        <h2 class="font-display italic font-light leading-[0.9] text-[clamp(1.8rem,3.5vw,3rem)] text-[var(--text)] reveal reveal-delay-1">Good<br/>questions.</h2>
+      </div>
+      <div class="reveal reveal-delay-2">
+        {faqs.map((f) => (
+          <details class="faq">
+            <summary><span>{f.q}</span><span class="faq-icon">+</span></summary>
+            <div class="faq-body">{f.a}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

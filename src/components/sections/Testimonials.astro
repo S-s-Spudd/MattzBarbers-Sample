@@ -1,0 +1,88 @@
+---
+// Reviews — update these with real Fresha reviews when available
+// Fresha review page: https://www.fresha.com/en-GB/a/mattz-barbers-birmingham-the-royal-town-of-sutton-coldfield-30a-walmley-road-q138b6q6?reviews=true
+const reviews = [
+  { quote: "Absolutely top tier. Best fade I've had — walked out a different man. Wouldn't go anywhere else now.", author: 'James O.', location: 'Walmley', rating: 5, source: 'Fresha', date: 'Nov 2024' },
+  { quote: "Been coming here for over a year. Consistent every single time. Clean shop, great music, no fuss.", author: 'Kieran T.', location: 'Sutton Coldfield', rating: 5, source: 'Fresha', date: 'Oct 2024' },
+  { quote: "Booked through Fresha in under 2 minutes, was in the chair shortly after. Exactly what I wanted.", author: 'Marcus B.', location: 'Erdington', rating: 5, source: 'Fresha', date: 'Sep 2024' },
+  { quote: "Took my son for his first proper cut. He loved it. Very patient and did a great job. Will be back.", author: 'David H.', location: 'Mere Green', rating: 5, source: 'Fresha', date: 'Aug 2024' },
+  { quote: "Sharp lines, clean fade, brilliant results. Easily the best barber since moving to Sutton.", author: 'Ryan M.', location: 'Four Oaks', rating: 5, source: 'Fresha', date: 'Jul 2024' },
+  { quote: "Always leave exactly how I wanted. Consistent quality every time. That's rare — and why I keep coming back.", author: 'Tom F.', location: 'Walmley', rating: 5, source: 'Fresha', date: 'Jun 2024' },
+];
+
+const ratingBreakdown = [
+  { label: '5 stars', pct: 94 },
+  { label: '4 stars', pct: 5  },
+  { label: '3 stars', pct: 1  },
+  { label: '2 stars', pct: 0  },
+  { label: '1 star',  pct: 0  },
+];
+const PX = 'px-[clamp(1.25rem,5vw,5rem)]';
+---
+
+<!-- Rating hero -->
+<section class="relative py-16 md:py-24" style="background:var(--bg-alt);border-bottom:1px solid var(--border);" aria-label="Rating summary">
+  <div class={`max-w-[1600px] mx-auto ${PX}`}>
+    <div class="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-10 md:gap-20 items-center">
+      <div class="reveal">
+        <p class="score-display text-[5rem] md:text-[7rem]">5.0</p>
+        <div class="stars mt-2 mb-3" aria-label="5 out of 5 stars">
+          {[...Array(5)].map(() => <div class="star" style="width:14px;height:14px;"></div>)}
+        </div>
+        <p class="text-xs text-[var(--text-muted)] tracking-[0.18em] uppercase">Based on 60+ reviews</p>
+        <p class="text-[0.65rem] text-[var(--text-faint)] mt-2 tracking-wide">via Fresha</p>
+      </div>
+      <div class="reveal reveal-delay-1">
+        {ratingBreakdown.map(({ label, pct }) => (
+          <div class="flex items-center gap-4 mb-3">
+            <span class="text-xs text-[var(--text-muted)] w-14 flex-shrink-0">{label}</span>
+            <div class="rating-bar-track flex-1"><div class="rating-bar-fill" style={`width:${pct}%;`}></div></div>
+            <span class="text-xs text-[var(--text-faint)] w-7 text-right">{pct}%</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews grid -->
+<section class="relative py-20 md:py-32" style="background:var(--bg);" aria-label="Client reviews">
+  <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden" aria-hidden="true">
+    <span class="watermark opacity-[0.03]">Word</span>
+  </div>
+  <div class={`relative z-10 max-w-[1600px] mx-auto ${PX}`}>
+    <div class="mb-12">
+      <p class="eyebrow mb-4 reveal">All Reviews</p>
+      <h2 class="font-display italic font-light leading-[0.9] text-[clamp(2rem,4vw,3.5rem)] text-[var(--text)] reveal reveal-delay-1">What they say.</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+      {reviews.map((r) => (
+        <article class="testimonial-card">
+          <div class="flex items-start justify-between mb-4 gap-3">
+            <div class="stars" aria-label={`${r.rating} out of 5 stars`}>{[...Array(r.rating)].map(() => <div class="star"></div>)}</div>
+            <div class="text-right flex-shrink-0">
+              <span class="text-[0.6rem] tracking-[0.12em] uppercase text-[var(--text-faint)]">via {r.source} · {r.date}</span>
+            </div>
+          </div>
+          <blockquote><p class="text-[0.9rem] text-[var(--text)] leading-relaxed">{r.quote}</p></blockquote>
+          <footer class="mt-5 flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium flex-shrink-0" style="background:var(--accent);color:#F5F4EF;" aria-hidden="true">{r.author.charAt(0)}</div>
+            <div>
+              <p class="text-[var(--text)] text-sm font-medium">{r.author}</p>
+              <p class="text-[var(--text-muted)] text-xs tracking-wide">{r.location}</p>
+            </div>
+          </footer>
+        </article>
+      ))}
+    </div>
+
+    <div class="mt-14 pt-8 border-t border-[var(--border)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 reveal">
+      <p class="text-sm text-[var(--text-muted)] max-w-[44ch] leading-relaxed">Had a great experience? Leaving a review helps others find us.</p>
+      <a href="https://www.fresha.com/en-GB/a/mattz-barbers-birmingham-the-royal-town-of-sutton-coldfield-30a-walmley-road-q138b6q6?reviews=true"
+         target="_blank" rel="noopener noreferrer" class="btn-book flex-shrink-0">
+        Leave a Review
+      </a>
+    </div>
+  </div>
+</section>

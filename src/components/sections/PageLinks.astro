@@ -1,0 +1,43 @@
+---
+const pages = [
+  { num: '01', href: '/services', label: 'The Menu',     desc: 'Every service, every price. Haircuts, taperfades, skin fades, beard work, and more.', eyebrow: 'Services & Pricing' },
+  { num: '02', href: '/reviews',  label: 'The Word',     desc: 'What clients say after leaving the chair. Consistently 5 stars on Fresha.',             eyebrow: 'Client Reviews'    },
+  { num: '03', href: '/find-us',  label: 'The Location', desc: '30A Walmley Road, Sutton Coldfield. Open 6 days. Appointment only.',                     eyebrow: 'Find & Contact'    },
+];
+---
+<section class="relative overflow-hidden" style="background:var(--bg-alt);border-top:1px solid var(--border);" aria-label="Site pages">
+  <div class="max-w-[1600px] mx-auto px-[clamp(1.25rem,5vw,5rem)] py-[clamp(4rem,8vw,7rem)]">
+
+    <p class="eyebrow mb-10 reveal">Explore</p>
+
+    <!-- Bigger cards: removed fixed grid gap, using border-collapse style -->
+    <div class="grid grid-cols-1 md:grid-cols-3" style="border:1px solid var(--border);">
+      {pages.map((page) => (
+        <a href={page.href} class="page-link-card" style="border-right:1px solid var(--border);border-bottom:none;" aria-label={`Go to ${page.eyebrow}`}>
+
+          <p class="font-display italic font-light text-[var(--accent)] leading-none mb-8"
+             style="font-size:clamp(3rem,5vw,5rem);opacity:0.22;">
+            {page.num}
+          </p>
+
+          <p class="eyebrow text-[0.6rem] mb-3">{page.eyebrow}</p>
+
+          <h3 class="font-display italic font-light text-[var(--text)] leading-tight mb-5"
+              style="font-size:clamp(1.9rem,3.5vw,3rem);">
+            {page.label}
+          </h3>
+
+          <p class="text-[var(--text-muted)] leading-relaxed mb-8"
+             style="font-size:clamp(0.82rem,1.2vw,0.95rem);">
+            {page.desc}
+          </p>
+
+          <span class="text-[0.7rem] tracking-[0.2em] uppercase text-[var(--accent)] flex items-center gap-2">
+            Explore <span aria-hidden="true">→</span>
+          </span>
+        </a>
+      ))}
+    </div>
+
+  </div>
+</section>

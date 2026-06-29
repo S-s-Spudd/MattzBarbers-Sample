@@ -1,0 +1,104 @@
+---
+// Home page opening — Charcoal + Red accent
+---
+<section id="opening" class="relative min-h-[100svh] flex flex-col justify-center overflow-hidden pt-24 pb-0" aria-label="Welcome">
+
+  <!-- Signature watermark -->
+  <div class="absolute inset-0 flex items-end overflow-hidden pointer-events-none select-none" aria-hidden="true">
+    <span class="watermark translate-y-[14%] -translate-x-[1%]">Mattz</span>
+  </div>
+
+  <div class="relative z-10 w-full max-w-[1600px] mx-auto px-[clamp(1.25rem,5vw,5rem)]
+              grid grid-cols-1 lg:grid-cols-[1fr_420px] xl:grid-cols-[1fr_500px]
+              gap-10 lg:gap-16 items-center" style="min-height:80vh;">
+
+    <!-- Left: text -->
+    <div class="flex flex-col justify-center">
+      <p class="eyebrow mb-6 reveal">Sutton Coldfield &nbsp;·&nbsp; Est. 2020</p>
+
+      <h1 class="font-display italic font-light leading-[0.88] reveal reveal-delay-1">
+        <span class="block text-[clamp(3rem,8.5vw,8.5rem)] text-[var(--text)]">The craft</span>
+        <span class="block text-[clamp(3rem,8.5vw,8.5rem)] text-[var(--text)] opacity-70">in the cut.</span>
+      </h1>
+
+      <div class="hairline-accent mt-7 mb-6 reveal reveal-delay-2"></div>
+
+      <p class="text-[var(--text-muted)] text-base md:text-lg leading-relaxed max-w-[38ch] reveal reveal-delay-3">
+        Professional men's hair services delivered with precision and care at the heart of Walmley.
+      </p>
+
+      <!-- Actions -->
+      <div class="mt-8 flex flex-wrap items-center gap-4 reveal reveal-delay-4">
+        <a href="https://www.fresha.com/a/mattz-barbers-birmingham-the-royal-town-of-sutton-coldfield-30a-walmley-road-q138b6q6/booking?allOffer=true&pId=1394571"
+           target="_blank" rel="noopener noreferrer" class="btn-book">
+          Book a Slot
+        </a>
+        <a href="/services" class="text-xs tracking-[0.18em] uppercase text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors flex items-center gap-2">
+          See Services <span aria-hidden="true">→</span>
+        </a>
+      </div>
+
+      <!-- Social proof + social icons -->
+      <div class="mt-10 flex flex-wrap items-center gap-6 reveal reveal-delay-5">
+        <div class="flex items-center gap-3">
+          <div class="stars" aria-label="5 stars">
+            {[...Array(5)].map(() => <div class="star"></div>)}
+          </div>
+          <span class="text-xs text-[var(--text-muted)] tracking-wide">5.0 · Google</span>
+        </div>
+
+        <!-- Social links — visible on home -->
+        <div class="flex items-center gap-1" style="border-left:1px solid var(--border);padding-left:1.5rem;">
+          <a href="https://www.instagram.com/mattzbarbers_/" target="_blank" rel="noopener noreferrer"
+             aria-label="Instagram" class="social-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
+          <a href="https://www.facebook.com/mattzbarbers/" target="_blank" rel="noopener noreferrer"
+             aria-label="Facebook" class="social-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: portrait photo (lg+ only) -->
+    <div class="hidden lg:block reveal reveal-delay-2">
+      <div class="relative" style="aspect-ratio:3/4;">
+        <div class="absolute inset-0 overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=900&q=85&auto=format&fit=crop"
+            alt="Barber at work at Mattz Barbers, Sutton Coldfield"
+            class="w-full h-full object-cover parallax-img scale-[1.1]"
+            loading="eager" fetchpriority="high" decoding="async" width="500" height="667"
+          />
+          <div class="absolute inset-0" style="background:radial-gradient(ellipse at center,transparent 45%,rgba(26,26,26,0.6) 100%);" aria-hidden="true"></div>
+        </div>
+        <div class="absolute inset-0 border border-[var(--accent)] opacity-20" aria-hidden="true"></div>
+        <div class="absolute top-3 left-3 right-3 bottom-3 border border-[var(--accent)] opacity-10" aria-hidden="true"></div>
+        <!-- Floating stat -->
+        <div class="absolute -bottom-5 -left-5 bg-[var(--surface)] border border-[var(--border)] px-4 py-3">
+          <p class="font-display italic text-[var(--accent)] text-3xl font-light leading-none">5★</p>
+          <p class="text-[0.62rem] text-[var(--text-muted)] mt-1 tracking-[0.12em] uppercase">Google Rating</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Marquee strip -->
+  <div class="relative z-10 mt-14 lg:mt-24 overflow-hidden" style="border-top:1px solid var(--border);border-bottom:1px solid var(--border);" aria-hidden="true">
+    <div class="py-3.5 marquee-track">
+      {['Haircuts','Skin Fades','Beard Trims','Hot Towel Shave','Kids Cuts','Appointment Only','Walmley'].flatMap(s => [
+        <span class="eyebrow" style="letter-spacing:0.24em;">{s}</span>,
+        <span class="text-[var(--accent)] text-base leading-none">·</span>
+      ])}
+      {['Haircuts','Skin Fades','Beard Trims','Hot Towel Shave','Kids Cuts','Appointment Only','Walmley'].flatMap(s => [
+        <span class="eyebrow" style="letter-spacing:0.24em;">{s}</span>,
+        <span class="text-[var(--accent)] text-base leading-none">·</span>
+      ])}
+    </div>
+  </div>
+</section>

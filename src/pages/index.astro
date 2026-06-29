@@ -1,0 +1,15 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Opening from '../components/sections/Opening.astro';
+import Gallery from '../components/sections/Gallery.astro';
+import PageLinks from '../components/sections/PageLinks.astro';
+---
+<Layout title="Mattz Barbers | Barbershop in Sutton Coldfield"
+        description="Mattz Barbers — professional men's haircuts, skin fades and beard services in Walmley, Sutton Coldfield. Appointment only. Book via Fresha.">
+  <a href="#opening" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:text-sm" style="background:var(--accent);color:#F5F4EF;">Skip to content</a>
+  <Nav />
+  <main id="opening"><Opening /><Gallery /><PageLinks /></main>
+  <Footer />
+</Layout>
