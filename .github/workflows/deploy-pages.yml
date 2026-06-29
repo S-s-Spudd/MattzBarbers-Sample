@@ -36,6 +36,9 @@ jobs:
       - name: Generate optimized WebP images
         run: node scripts/prepare-images.mjs
 
+      - name: Apply hero image patch
+        run: node scripts/patch-hero-image.mjs
+
       - name: Apply gallery order
         run: node scripts/patch-gallery-order.mjs
 
