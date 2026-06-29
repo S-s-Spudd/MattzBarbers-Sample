@@ -41,7 +41,7 @@ async function generateShopInteriorWebp(inputPath, outputPath) {
   const cropWidth = width;
   const cropHeight = Math.min(height, Math.round(cropWidth / targetRatio));
   const maxTop = Math.max(0, height - cropHeight);
-  const top = Math.round(maxTop * 0.52);
+  const top = Math.round(maxTop * 0.58);
 
   await sharp(inputPath, { failOn: 'none' })
     .rotate()
