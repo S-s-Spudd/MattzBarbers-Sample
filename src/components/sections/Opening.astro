@@ -1,5 +1,7 @@
 ---
 // Home page opening — Charcoal + Red accent
+const imagePath = (fileName) => `${import.meta.env.BASE_URL}Images/${encodeURIComponent(fileName)}`;
+const servicesHref = `${import.meta.env.BASE_URL}services`;
 ---
 <section id="opening" class="relative min-h-[100svh] flex flex-col justify-center overflow-hidden pt-24 pb-0" aria-label="Welcome">
 
@@ -33,7 +35,7 @@
            target="_blank" rel="noopener noreferrer" class="btn-book">
           Book a Slot
         </a>
-        <a href="/services" class="text-xs tracking-[0.18em] uppercase text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors flex items-center gap-2">
+        <a href={servicesHref} class="text-xs tracking-[0.18em] uppercase text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors flex items-center gap-2">
           See Services <span aria-hidden="true">→</span>
         </a>
       </div>
@@ -70,8 +72,8 @@
       <div class="relative" style="aspect-ratio:3/4;">
         <div class="absolute inset-0 overflow-hidden">
           <img
-            src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=900&q=85&auto=format&fit=crop"
-            alt="Barber at work at Mattz Barbers, Sutton Coldfield"
+            src={imagePath('Clean Fade.jpg')}
+            alt="Clean fade haircut at Mattz Barbers, Sutton Coldfield"
             class="w-full h-full object-cover parallax-img scale-[1.1]"
             loading="eager" fetchpriority="high" decoding="async" width="500" height="667"
           />
