@@ -30,10 +30,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Copy gallery images
-        run: |
-          mkdir -p public/Images
-          cp -R Images/. public/Images/
+      - name: Install image optimizer
+        run: npm install sharp@0.34.5 --no-save --no-audit --no-fund
+
+      - name: Generate optimized WebP images
+        run: node scripts/prepare-images.mjs
 
       - name: Build site
         run: npx astro build --config astro.config.github.mjs
