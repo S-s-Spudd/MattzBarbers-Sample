@@ -55,9 +55,11 @@ if (start !== -1 && end !== -1) {
   source = source.slice(0, start) + photosArray + source.slice(end + 1);
 }
 
+source = source.replace('Captured between<br/>the before &amp; after.', 'Gallery');
+source = source.replace('Captured between<br />the before &amp; after.', 'Gallery');
 source = source.replace('object-cover object-top block', 'object-contain block');
 source = source.replace('max-w-full max-h-full object-contain block', 'w-full h-full object-cover block');
 source = source.replace(' flex items-center justify-center bg-black/40 p-8', '');
 
 await fs.writeFile(file, source);
-console.log('Patched gallery image order and fit');
+console.log('Patched gallery image order, heading, and fit');
