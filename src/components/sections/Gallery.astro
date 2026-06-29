@@ -1,12 +1,50 @@
 ---
 // Gallery — charcoal darkroom BG (#111111), not teal
+const imagePath = (fileName) => `${import.meta.env.BASE_URL}Images/${encodeURIComponent(fileName)}`;
+
 const photos = [
-  { src: 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=700&q=80&auto=format&fit=crop&crop=face', alt: 'Clean skin fade', caption: 'The Fade.', rotate: '-1.8deg', span2: true },
-  { src: 'https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=600&q=80&auto=format&fit=crop', alt: 'Precision haircut', caption: 'Scissors & Craft.', rotate: '1.5deg', span2: false },
-  { src: 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&q=80&auto=format&fit=crop', alt: 'Barber at work', caption: 'In the Zone.', rotate: '-1.2deg', span2: false },
-  { src: 'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=700&q=80&auto=format&fit=crop', alt: 'Beard shape', caption: 'The Shape-Up.', rotate: '2.2deg', span2: true },
-  { src: 'https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=600&q=80&auto=format&fit=crop', alt: 'The chair', caption: 'The Chair.', rotate: '-1.5deg', span2: false },
-  { src: 'https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=600&q=80&auto=format&fit=crop', alt: 'Hot towel finish', caption: 'The Finish.', rotate: '0.8deg', span2: false },
+  {
+    src: imagePath('Clean Fade.jpg'),
+    alt: 'Clean fade haircut at Mattz Barbers',
+    caption: 'Clean Fade.',
+    rotate: '-1.8deg',
+  },
+  {
+    src: imagePath('Clean Fade1.jpg'),
+    alt: 'Fresh clean fade from Mattz Barbers',
+    caption: 'Fresh Finish.',
+    rotate: '1.5deg',
+  },
+  {
+    src: imagePath('Fade.jpg'),
+    alt: 'Fade haircut detail at Mattz Barbers',
+    caption: 'The Fade.',
+    rotate: '-1deg',
+  },
+  {
+    src: imagePath('Shape Up.jpg'),
+    alt: 'Sharp shape up haircut at Mattz Barbers',
+    caption: 'The Shape-Up.',
+    rotate: '2deg',
+  },
+  {
+    src: imagePath('Shop Interior.jpg'),
+    alt: 'Mattz Barbers shop interior',
+    caption: 'Inside the Shop.',
+    rotate: '-1.5deg',
+  },
+  {
+    src: imagePath('Group Photo.jpg'),
+    alt: 'Group photo at Mattz Barbers',
+    caption: 'The Team.',
+    rotate: '0.8deg',
+  },
+  {
+    src: imagePath('Logo.jpg'),
+    alt: 'Mattz Barbers logo',
+    caption: 'Mattz Barbers.',
+    rotate: '-0.6deg',
+  },
 ];
 ---
 
@@ -46,7 +84,7 @@ const photos = [
     <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5" style="grid-auto-rows:clamp(180px,22vw,260px);">
       <!-- Large: col 1–2, row 1–2 -->
       <div class="col-span-1 md:col-span-2 row-span-1 md:row-span-2">
-        <div class="polaroid h-full" style="transform:rotate(-1.8deg);">
+        <div class="polaroid h-full" style={`transform:rotate(${photos[0].rotate});`}>
           <div class="polaroid-photo h-[calc(100%-40px)]">
             <img src={photos[0].src} alt={photos[0].alt} class="w-full h-full object-cover block" loading="lazy" decoding="async"/>
           </div>
@@ -55,7 +93,7 @@ const photos = [
       </div>
       <!-- Small: col 3 row 1 -->
       <div class="col-span-1 row-span-1">
-        <div class="polaroid h-full" style="transform:rotate(1.5deg);">
+        <div class="polaroid h-full" style={`transform:rotate(${photos[1].rotate});`}>
           <div class="polaroid-photo h-[calc(100%-40px)]">
             <img src={photos[1].src} alt={photos[1].alt} class="w-full h-full object-cover block" loading="lazy" decoding="async"/>
           </div>
@@ -64,7 +102,7 @@ const photos = [
       </div>
       <!-- Small: col 4 row 1 -->
       <div class="col-span-1 row-span-1">
-        <div class="polaroid h-full" style="transform:rotate(-1deg);">
+        <div class="polaroid h-full" style={`transform:rotate(${photos[2].rotate});`}>
           <div class="polaroid-photo h-[calc(100%-40px)]">
             <img src={photos[2].src} alt={photos[2].alt} class="w-full h-full object-cover block" loading="lazy" decoding="async"/>
           </div>
@@ -73,7 +111,7 @@ const photos = [
       </div>
       <!-- Large: col 3–4, row 2 -->
       <div class="col-span-2 row-span-1">
-        <div class="polaroid h-full" style="transform:rotate(2deg);">
+        <div class="polaroid h-full" style={`transform:rotate(${photos[3].rotate});`}>
           <div class="polaroid-photo h-[calc(100%-40px)]">
             <img src={photos[3].src} alt={photos[3].alt} class="w-full h-full object-cover object-top block" loading="lazy" decoding="async"/>
           </div>
@@ -82,7 +120,7 @@ const photos = [
       </div>
       <!-- Small: col 1 row 3 -->
       <div class="col-span-1 row-span-1">
-        <div class="polaroid h-full" style="transform:rotate(-1.5deg);">
+        <div class="polaroid h-full" style={`transform:rotate(${photos[4].rotate});`}>
           <div class="polaroid-photo h-[calc(100%-40px)]">
             <img src={photos[4].src} alt={photos[4].alt} class="w-full h-full object-cover block" loading="lazy" decoding="async"/>
           </div>
@@ -91,20 +129,21 @@ const photos = [
       </div>
       <!-- Small: col 2 row 3 -->
       <div class="col-span-1 row-span-1">
-        <div class="polaroid h-full" style="transform:rotate(0.8deg);">
+        <div class="polaroid h-full" style={`transform:rotate(${photos[5].rotate});`}>
           <div class="polaroid-photo h-[calc(100%-40px)]">
             <img src={photos[5].src} alt={photos[5].alt} class="w-full h-full object-cover block" loading="lazy" decoding="async"/>
           </div>
           <p class="polaroid-caption">{photos[5].caption}</p>
         </div>
       </div>
-      <!-- Pull quote: col 3–4, row 3 (desktop only) -->
-      <div class="hidden md:flex col-span-2 row-span-1 items-center justify-center p-6" style="border:1px solid rgba(139,74,67,0.15);">
-        <blockquote class="text-center">
-          <p class="font-display italic font-light leading-snug" style="font-size:clamp(1.1rem,2.2vw,1.5rem);color:rgba(245,244,239,0.55);">
-            "Where the craft speaks<br/>louder than the chair."
-          </p>
-        </blockquote>
+      <!-- Brand card: col 3–4, row 3 -->
+      <div class="col-span-2 row-span-1">
+        <div class="polaroid h-full" style={`transform:rotate(${photos[6].rotate});`}>
+          <div class="polaroid-photo h-[calc(100%-40px)] flex items-center justify-center bg-black/40 p-8">
+            <img src={photos[6].src} alt={photos[6].alt} class="max-w-full max-h-full object-contain block" loading="lazy" decoding="async"/>
+          </div>
+          <p class="polaroid-caption">{photos[6].caption}</p>
+        </div>
       </div>
     </div>
 
