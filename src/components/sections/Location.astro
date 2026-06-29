@@ -145,30 +145,83 @@ const PX = 'px-[clamp(1.25rem,5vw,5rem)]';
         name="contact"
         method="POST"
         data-netlify="true"
+        netlify-honeypot="bot-field"
+        accept-charset="UTF-8"
         class="flex flex-col gap-4 reveal reveal-delay-2"
         aria-label="Contact form"
       >
         <input type="hidden" name="form-name" value="contact" />
+        <p class="hidden" aria-hidden="true">
+          <label>Do not fill this out: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+        </p>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label for="cf-name" class="eyebrow text-[0.58rem] block mb-2">Name</label>
-            <input id="cf-name" name="name" type="text" required placeholder="Your name" class="contact-field" />
+            <input
+              id="cf-name"
+              name="name"
+              type="text"
+              required
+              minlength="2"
+              maxlength="80"
+              autocomplete="name"
+              placeholder="Your name"
+              class="contact-field"
+              aria-describedby="cf-name-error"
+            />
+            <p id="cf-name-error" data-error-for="cf-name" class="mt-2 hidden text-[0.68rem] text-[var(--accent)]" aria-live="polite"></p>
           </div>
           <div>
             <label for="cf-email" class="eyebrow text-[0.58rem] block mb-2">Email</label>
-            <input id="cf-email" name="email" type="email" required placeholder="your@email.com" class="contact-field" />
+            <input
+              id="cf-email"
+              name="email"
+              type="email"
+              required
+              maxlength="120"
+              inputmode="email"
+              autocomplete="email"
+              pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$"
+              placeholder="your@email.com"
+              class="contact-field"
+              aria-describedby="cf-email-error"
+            />
+            <p id="cf-email-error" data-error-for="cf-email" class="mt-2 hidden text-[0.68rem] text-[var(--accent)]" aria-live="polite"></p>
           </div>
         </div>
 
         <div>
           <label for="cf-phone" class="eyebrow text-[0.58rem] block mb-2">Phone (optional)</label>
-          <input id="cf-phone" name="phone" type="tel" placeholder="07xxx xxxxxx" class="contact-field" />
+          <input
+            id="cf-phone"
+            name="phone"
+            type="tel"
+            maxlength="18"
+            inputmode="tel"
+            autocomplete="tel"
+            pattern="^(?:\+44\s?7\d{3}|07\d{3})\s?\d{3}\s?\d{3}$"
+            placeholder="07xxx xxxxxx"
+            class="contact-field"
+            aria-describedby="cf-phone-error"
+          />
+          <p id="cf-phone-error" data-error-for="cf-phone" class="mt-2 hidden text-[0.68rem] text-[var(--accent)]" aria-live="polite"></p>
         </div>
 
         <div>
           <label for="cf-message" class="eyebrow text-[0.58rem] block mb-2">Message</label>
-          <textarea id="cf-message" name="message" required rows="5" placeholder="How can we help?" class="contact-field resize-none"></textarea>
+          <textarea
+            id="cf-message"
+            name="message"
+            required
+            minlength="10"
+            maxlength="600"
+            rows="5"
+            placeholder="How can we help?"
+            class="contact-field resize-none"
+            aria-describedby="cf-message-error"
+          ></textarea>
+          <p id="cf-message-error" data-error-for="cf-message" class="mt-2 hidden text-[0.68rem] text-[var(--accent)]" aria-live="polite"></p>
         </div>
 
         <div class="flex items-center gap-4 flex-wrap">
@@ -179,3 +232,123 @@ const PX = 'px-[clamp(1.25rem,5vw,5rem)]';
     </div>
   </div>
 </section>
+
+<script is:inline>
+(function () {
+  function initContactValidation() {
+    var form = document.querySelector('form[name="contact"]');
+    if (!form) return;
+
+    var fields = {
+      name: document.getElementById('cf-name'),
+      email: document.getElementById('cf-email'),
+      phone: document.getElementById('cf-phone'),
+      message: document.getElementById('cf-message')
+    };
+
+    var nameRegex = /^(?=.{2,80}$)(?!.*(?:https?:\/\/|www\.))[\p{L}][\p{L} .'-]*$/u;
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    var phoneRegex = /^(?:\+44\s?7\d{3}|07\d{3})\s?\d{3}\s?\d{3}$/;
+    var urlRegex = /(https?:\/\/|www\.)/i;
+
+    function setError(field, message) {
+      var error = document.querySelector('[data-error-for="' + field.id + '"]');
+      field.setCustomValidity(message);
+      field.setAttribute('aria-invalid', message ? 'true' : 'false');
+
+      if (!error) return;
+      error.textContent = message;
+      error.classList.toggle('hidden', !message);
+    }
+
+    function normaliseSpaces(value) {
+      return value.trim().replace(/\s+/g, ' ');
+    }
+
+    function validateName() {
+      var field = fields.name;
+      var value = normaliseSpaces(field.value);
+      field.value = value;
+
+      if (!value) return setError(field, 'Please enter your name.'), false;
+      if (!nameRegex.test(value)) return setError(field, 'Use a real name, 2-80 characters, without numbers or links.'), false;
+      setError(field, '');
+      return true;
+    }
+
+    function validateEmail() {
+      var field = fields.email;
+      var value = field.value.trim().toLowerCase();
+      field.value = value;
+
+      if (!value) return setError(field, 'Please enter your email address.'), false;
+      if (!emailRegex.test(value)) return setError(field, 'Please enter a valid email address, for example name@example.com.'), false;
+      setError(field, '');
+      return true;
+    }
+
+    function validatePhone() {
+      var field = fields.phone;
+      var value = normaliseSpaces(field.value);
+      field.value = value;
+
+      if (!value) return setError(field, ''), true;
+      if (!phoneRegex.test(value)) return setError(field, 'Use a valid UK mobile number, for example 07401 123456 or +44 7401 123456.'), false;
+      setError(field, '');
+      return true;
+    }
+
+    function validateMessage() {
+      var field = fields.message;
+      var value = normaliseSpaces(field.value);
+      field.value = value;
+
+      if (!value) return setError(field, 'Please enter a message.'), false;
+      if (value.length < 10) return setError(field, 'Please enter at least 10 characters.'), false;
+      if (value.length > 600) return setError(field, 'Please keep the message under 600 characters.'), false;
+      if (urlRegex.test(value)) return setError(field, 'Please remove links from the message.'), false;
+      setError(field, '');
+      return true;
+    }
+
+    var validators = [validateName, validateEmail, validatePhone, validateMessage];
+
+    Object.keys(fields).forEach(function (key) {
+      var field = fields[key];
+      if (!field) return;
+      field.addEventListener('input', function () {
+        if (field.getAttribute('aria-invalid') === 'true') {
+          validators.forEach(function (validator) { validator(); });
+        }
+      });
+      field.addEventListener('blur', function () {
+        if (key === 'name') validateName();
+        if (key === 'email') validateEmail();
+        if (key === 'phone') validatePhone();
+        if (key === 'message') validateMessage();
+      });
+    });
+
+    form.addEventListener('submit', function (event) {
+      var honeypot = form.querySelector('[name="bot-field"]');
+      if (honeypot && honeypot.value.trim()) {
+        event.preventDefault();
+        return;
+      }
+
+      var valid = validators.map(function (validator) { return validator(); }).every(Boolean);
+      if (!valid) {
+        event.preventDefault();
+        var firstInvalid = form.querySelector('[aria-invalid="true"]');
+        if (firstInvalid) firstInvalid.focus();
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initContactValidation);
+  } else {
+    initContactValidation();
+  }
+})();
+</script>
