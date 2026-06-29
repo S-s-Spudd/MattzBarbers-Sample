@@ -21,6 +21,8 @@ const replacements = [
   ['Logo.jpg', 'logo.webp'],
   ['https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=900&amp;q=85&amp;auto=format&amp;fit=crop', '/MattzBarbers-Sample/Images/clean-fade.webp'],
   ['https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=900&q=85&auto=format&fit=crop', '/MattzBarbers-Sample/Images/clean-fade.webp'],
+  ['https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=900\\u0026q=85\\u0026auto=format\\u0026fit=crop', '/MattzBarbers-Sample/Images/clean-fade.webp'],
+  ['https:\\/\\/images.unsplash.com\\/photo-1503951914875-452162b0f3f1?w=900\\u0026q=85\\u0026auto=format\\u0026fit=crop', '/MattzBarbers-Sample/Images/clean-fade.webp'],
 ];
 
 async function walk(dir) {
