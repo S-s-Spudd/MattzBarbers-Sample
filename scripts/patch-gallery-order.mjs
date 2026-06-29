@@ -57,7 +57,10 @@ if (start !== -1 && end !== -1) {
 
 source = source.replace('Captured between<br/>the before &amp; after.', 'Gallery');
 source = source.replace('Captured between<br />the before &amp; after.', 'Gallery');
-source = source.replace('object-cover object-top block', 'object-cover object-bottom block');
+source = source.replace(
+  'class="w-full h-full object-cover object-top block" loading="lazy"',
+  'class="w-full h-full object-cover block" style="object-position:50% 64%;" loading="lazy"'
+);
 source = source.replace('max-w-full max-h-full object-contain block', 'w-full h-full object-cover block');
 source = source.replace(' flex items-center justify-center bg-black/40 p-8', '');
 
