@@ -18,16 +18,49 @@ const images = [
 
 await fs.mkdir(outputDir, { recursive: true });
 
-for (const [inputName, outputName] of images) {
-  const inputPath = path.join(sourceDir, inputName);
-  const outputPath = path.join(outputDir, outputName);
-
+async function generateDefaultWebp(inputPath, outputPath) {
   await sharp(inputPath, { failOn: 'none' })
     .rotate()
     .toColorspace('srgb')
     .resize({ width: 1800, height: 1800, fit: 'inside', withoutEnlargement: true })
     .webp({ quality: 84, effort: 6 })
     .toFile(outputPath);
+}
+
+async function generateShopInteriorWebp(inputPath, outputPath) {
+  const image = sharp(inputPath, { failOn: 'none' }).rotate().toColorspace('srgb');
+  const metadata = await image.metadata();
+  const width = metadata.width;
+  const height = metadata.height;
+
+  if (!width || !height) {
+    throw new Error(`Could not read dimensions for ${inputPath}`);
+  }
+
+  const targetRatio = 4;
+  const cropWidth = width;
+  const cropHeight = Math.min(height, Math.round(cropWidth / targetRatio));
+  const maxTop = Math.max(0, height - cropHeight);
+  const top = Math.round(maxTop * 0.3);
+
+  await sharp(inputPath, { failOn: 'none' })
+    .rotate()
+    .toColorspace('srgb')
+    .extract({ left: 0, top, width: cropWidth, height: cropHeight })
+    .resize({ width: 1800, height: 450, fit: 'cover' })
+    .webp({ quality: 84, effort: 6 })
+    .toFile(outputPath);
+}
+
+for (const [inputName, outputName] of images) {
+  const inputPath = path.join(sourceDir, inputName);
+  const outputPath = path.join(outputDir, outputName);
+
+  if (inputName === 'Shop Interior.jpg') {
+    await generateShopInteriorWebp(inputPath, outputPath);
+  } else {
+    await generateDefaultWebp(inputPath, outputPath);
+  }
 
   console.log(`Generated ${path.relative(process.cwd(), outputPath)}`);
 }
