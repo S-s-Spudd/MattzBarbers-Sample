@@ -42,6 +42,9 @@ jobs:
       - name: Apply gallery order
         run: node scripts/patch-gallery-order.mjs
 
+      - name: Apply gallery fit
+        run: node scripts/patch-gallery-fit.mjs
+
       - name: Build site
         run: npx astro build --config astro.config.github.mjs
 
