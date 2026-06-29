@@ -8,43 +8,43 @@ const end = source.indexOf('];', start);
 
 const photosArray = `const photos = [
   {
-    src: imagePath('Clean Fade.jpg'),
+    src: imagePath('clean-fade.webp'),
     alt: 'Clean fade haircut at Mattz Barbers',
     caption: 'Clean Fade.',
     rotate: '-1.8deg',
   },
   {
-    src: imagePath('Clean Fade1.jpg'),
+    src: imagePath('clean-fade-1.webp'),
     alt: 'Fresh clean fade from Mattz Barbers',
     caption: 'Fresh Finish.',
     rotate: '1.5deg',
   },
   {
-    src: imagePath('Fade.jpg'),
+    src: imagePath('fade.webp'),
     alt: 'Fade haircut detail at Mattz Barbers',
     caption: 'The Fade.',
     rotate: '-1deg',
   },
   {
-    src: imagePath('Shop Interior.jpg'),
+    src: imagePath('shop-interior.webp'),
     alt: 'Mattz Barbers shop interior',
     caption: 'Inside the Shop.',
     rotate: '2deg',
   },
   {
-    src: imagePath('Shape Up.jpg'),
+    src: imagePath('shape-up.webp'),
     alt: 'Sharp shape up haircut at Mattz Barbers',
     caption: 'The Shape-Up.',
     rotate: '-1.5deg',
   },
   {
-    src: imagePath('Logo.jpg'),
+    src: imagePath('logo.webp'),
     alt: 'Mattz Barbers logo',
     caption: 'Mattz Barbers.',
     rotate: '0.8deg',
   },
   {
-    src: imagePath('Group Photo.jpg'),
+    src: imagePath('group-photo.webp'),
     alt: 'Group photo at Mattz Barbers',
     caption: 'The Team.',
     rotate: '-0.6deg',
@@ -57,7 +57,7 @@ if (start !== -1 && end !== -1) {
 
 source = source.replace('Captured between<br/>the before &amp; after.', 'Gallery');
 source = source.replace('Captured between<br />the before &amp; after.', 'Gallery');
-source = source.replace('object-cover object-top block', 'object-contain block');
+source = source.replace('object-cover object-top block', 'object-cover object-bottom block');
 source = source.replace('max-w-full max-h-full object-contain block', 'w-full h-full object-cover block');
 source = source.replace(' flex items-center justify-center bg-black/40 p-8', '');
 
