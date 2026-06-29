@@ -40,30 +40,7 @@ jobs:
         run: npx astro build --config astro.config.github.mjs
 
       - name: Fix published GitHub Pages paths
-        run: |
-          python3 -c "from pathlib import Path
-          repl={
-          'href=\"/\"':'href=\"/MattzBarbers-Sample/\"',
-          'href=\"/services\"':'href=\"/MattzBarbers-Sample/services\"',
-          'href=\"/reviews\"':'href=\"/MattzBarbers-Sample/reviews\"',
-          'href=\"/find-us\"':'href=\"/MattzBarbers-Sample/find-us\"',
-          'src=\"/images/logo.webp\"':'src=\"/MattzBarbers-Sample/images/logo.webp\"',
-          '/MattzBarbers-SampleImages/':'/MattzBarbers-Sample/Images/',
-          'Clean%20Fade.jpg':'clean-fade.webp',
-          'Clean%20Fade1.jpg':'clean-fade-1.webp',
-          'Fade.jpg':'fade.webp',
-          'Shape%20Up.jpg':'shape-up.webp',
-          'Shop%20Interior.jpg':'shop-interior.webp',
-          'Group%20Photo.jpg':'group-photo.webp',
-          'Logo.jpg':'logo.webp',
-          'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=900&amp;q=85&amp;auto=format&amp;fit=crop':'/MattzBarbers-Sample/Images/clean-fade.webp',
-          'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=900&q=85&auto=format&fit=crop':'/MattzBarbers-Sample/Images/clean-fade.webp'
-          }
-          for p in Path('dist').rglob('*'):
-              if p.suffix.lower() in {'.html','.js','.css'}:
-                  s=p.read_text(errors='ignore')
-                  for a,b in repl.items(): s=s.replace(a,b)
-                  p.write_text(s)"
+        run: node scripts/fix-pages-dist.mjs
 
       - name: Disable Jekyll
         run: touch dist/.nojekyll
