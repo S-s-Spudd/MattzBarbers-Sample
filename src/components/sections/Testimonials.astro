@@ -1,6 +1,12 @@
 ---
-// Reviews — update these with real Fresha reviews when available
+// Reviews are manually approved snippets; review counts below match the supplied Fresha and Google screenshots.
 // Fresha review page: https://www.fresha.com/en-GB/a/mattz-barbers-birmingham-the-royal-town-of-sutton-coldfield-30a-walmley-road-q138b6q6?reviews=true
+const reviewSummary = {
+  rating: '5.0',
+  freshaReviews: 139,
+  googleReviews: 204,
+};
+
 const reviews = [
   { quote: "Absolutely top tier. Best fade I've had — walked out a different man. Wouldn't go anywhere else now.", author: 'James O.', location: 'Walmley', rating: 5, source: 'Fresha', date: 'Nov 2024' },
   { quote: "Been coming here for over a year. Consistent every single time. Clean shop, great music, no fuss.", author: 'Kieran T.', location: 'Sutton Coldfield', rating: 5, source: 'Fresha', date: 'Oct 2024' },
@@ -11,11 +17,11 @@ const reviews = [
 ];
 
 const ratingBreakdown = [
-  { label: '5 stars', pct: 94 },
-  { label: '4 stars', pct: 5  },
-  { label: '3 stars', pct: 1  },
-  { label: '2 stars', pct: 0  },
-  { label: '1 star',  pct: 0  },
+  { label: '5 stars', count: 138, pct: 99 },
+  { label: '4 stars', count: 1, pct: 1  },
+  { label: '3 stars', count: 0, pct: 0  },
+  { label: '2 stars', count: 0, pct: 0  },
+  { label: '1 star',  count: 0, pct: 0  },
 ];
 const PX = 'px-[clamp(1.25rem,5vw,5rem)]';
 ---
@@ -25,19 +31,19 @@ const PX = 'px-[clamp(1.25rem,5vw,5rem)]';
   <div class={`max-w-[1600px] mx-auto ${PX}`}>
     <div class="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-10 md:gap-20 items-center">
       <div class="reveal">
-        <p class="score-display text-[5rem] md:text-[7rem]">5.0</p>
-        <div class="stars mt-2 mb-3" aria-label="5 out of 5 stars">
+        <p class="score-display text-[5rem] md:text-[7rem]">{reviewSummary.rating}</p>
+        <div class="stars mt-2 mb-3" aria-label={`${reviewSummary.rating} out of 5 stars`}>
           {[...Array(5)].map(() => <div class="star" style="width:14px;height:14px;"></div>)}
         </div>
-        <p class="text-xs text-[var(--text-muted)] tracking-[0.18em] uppercase">Based on 60+ reviews</p>
-        <p class="text-[0.65rem] text-[var(--text-faint)] mt-2 tracking-wide">via Fresha</p>
+        <p class="text-xs text-[var(--text-muted)] tracking-[0.18em] uppercase">Based on {reviewSummary.freshaReviews} Fresha reviews</p>
+        <p class="text-[0.65rem] text-[var(--text-faint)] mt-2 tracking-wide">Also {reviewSummary.rating} on Google from {reviewSummary.googleReviews} reviews</p>
       </div>
       <div class="reveal reveal-delay-1">
-        {ratingBreakdown.map(({ label, pct }) => (
-          <div class="flex items-center gap-4 mb-3">
+        {ratingBreakdown.map(({ label, count, pct }) => (
+          <div class="flex items-center gap-4 mb-3" aria-label={`${label}: ${count} Fresha reviews`}>
             <span class="text-xs text-[var(--text-muted)] w-14 flex-shrink-0">{label}</span>
-            <div class="rating-bar-track flex-1"><div class="rating-bar-fill" style={`width:${pct}%;`}></div></div>
-            <span class="text-xs text-[var(--text-faint)] w-7 text-right">{pct}%</span>
+            <div class="rating-bar-track flex-1" aria-hidden="true"><div class="rating-bar-fill" style={`width:${pct}%;`}></div></div>
+            <span class="text-xs text-[var(--text-faint)] w-7 text-right">{count}</span>
           </div>
         ))}
       </div>
